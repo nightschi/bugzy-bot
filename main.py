@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+import webserver
 import os
 
 load_dotenv()
@@ -35,6 +36,10 @@ async def on_message(message):
         role = discord.utils.get(message.guild.roles, name=ROLE_NAME)
         await message.channel.send(f'{role.mention}, {message.author.mention} has sent a message in this channel.')
     await bot.process_commands(message)
+
+
+# Keep alive.
+webserver.keep_alive()
 
 # Run the bot.
 bot.run(DISCORD_BOT_TOKEN)
