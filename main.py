@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
-import webserver
 import os
+import time
 
 load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN') # Place DISCORD_BOT_TOKEN variable containing your discord bot token in .env file.
@@ -36,10 +36,6 @@ async def on_message(message):
         role = discord.utils.get(message.guild.roles, name=ROLE_NAME)
         await message.channel.send(f'{role.mention}, {message.author.mention} has sent a message in this channel.')
     await bot.process_commands(message)
-
-
-# Keep alive.
-webserver.keep_alive()
 
 # Run the bot.
 bot.run(DISCORD_BOT_TOKEN)
